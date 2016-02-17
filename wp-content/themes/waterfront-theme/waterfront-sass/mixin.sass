@@ -1,0 +1,46 @@
+$color-blue-vintage : #424964 
+$color-pink-vintage	:  #a82743
+
+
+$hegint-menu : (126px/2)
+$color-bg-footer : #efefef
+$color-overlay-in :#fef9e8
+$color-open-hours : rgba(248,249,250,.8)
+$border-title-black : 3px solid #000;
+
+=blackGroundHover($colorBG : rgba(242,238,222,.8))
+	position: absolute
+	width: 100%
+	height: 100%
+	top:0
+	z-index: 1
+	background-color: $colorBG
+
+=border-radius($radius:1px)
+	-webkit-border-radius: 1px 
+	border-radius: 1px 
+	@if $radius == "1px"
+		background-color: red  
+		width: 100%
+		float: left
+	@else 
+		background-color: blue
+		width: 100%
+		position: absolute
+		left: 0
+   
+=height-hover($height-hover : 28px,$margin-top-hover:-($height-hover/2))
+	height: $height-hover
+	margin-top: $margin-top-hover
+	
+=color-analagous()
+	background: #FADAD7 -webkit-gradient(linear, left top, left bottom, from(#FAF1D7), to(#FADAD7)) no-repeat
+	background: #FADAD7 -moz-linear-gradient(top, #FAF1D7, #FADAD7) no-repeat
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#FAF1D7, endColorstr=#FADAD7) no-repeat
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#FAF1D7, endColorstr=#FAF1D7)" no-repeat
+
+=font-poppins($weight:400 ,$size: 42px)
+	font-family: 'Poppins', sans-serif;
+	font-weight: $weight
+	font-size: $size 
+	//font-size: : $size 

@@ -1,0 +1,1140 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,300);
+@import mixin
+@import animation
+
+.custom-imgrespomsive
+	width: 100% 
+.padding
+	padding-left: 0px
+	padding-right: 0px 
+.padding-in
+	padding-left: 15px
+	padding-right: 15px  
+body
+	background-color: #fff
+	+font-poppins (600,42px)
+	color: #000 
+header
+	background-color: #fff
+	width: 100%
+	height: $hegint-menu
+	position: relative
+	color: #000
+	margin-top: 20px
+.banner
+	width: 100%
+	float: left
+	video
+	 	width: 100% 
+	 	display: block
+
+.screenShot
+	width: 100%
+	float: left
+	position: absolute
+	top: 98px
+
+.video
+	position: relative
+	z-index: 2  
+.video-mobile
+	display: none
+
+.video-desktop
+	display: block
+	position: relative
+.header-waterfornt
+	padding-left: 0
+	padding-right: 0 
+span.title-opening-day-mobile
+	+font-poppins(600,14px)
+	text-transform: uppercase
+	float: left
+	margin-top: 10px 
+
+
+
+#menu-desktop
+	margin-left: -15px 
+	width: 100%
+	position: absolute
+	height: 565px
+	background-color: rgba(255,255,255,.8)
+	color: #000
+	z-index: 10
+	top:80px;
+	display: none
+	&.open
+		display: block
+		//transition-timing-function: ease-out;
+		animation: menu-open  0.7s
+	&.close
+		animation: menu-close 0.7s	
+	#close-menu
+		position: absolute
+		top:0
+		right:0
+		z-index: 11
+		#close-menu-destop
+			width: 30px
+			height: 20px 
+			position: absolute
+			bottom: 0
+			right: 15px 
+			top: -35px
+			cursor: pointer
+			display: none
+			&.open
+				display: block
+	ul
+		padding: 0
+		margin-top: 125px 
+		>li
+			text-align: center
+			list-style: none
+			text-transform: uppercase
+			+font-poppins(600,23px)
+			a
+				color: #000 
+		>li+li:before
+		 	content: "—"
+		 	width: 100%
+		 	float: left
+		 	text-align: center
+		  
+	// ul
+	//    	padding: 0
+	   	// li+li:before
+	   	// 	content: "—"
+	   	// >li
+	    // 	text-align: center
+	    // 	a
+	    // 		color: #000
+	   
+	  //   li+li:before
+			// content: "—"
+			// width: 100% 
+			// float: left
+			// text-align: center    
+// .container-waterfront
+// 	padding-left: 130px
+// 	padding-right: 130px   
+	
+	// position: fixed
+	// z-index: 2 
+	// -webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.4);
+	// box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.4);
+	// ul
+	// 	>li
+	// 		float: left
+	// 		margin-left: 30px
+	// 		list-style-type: none
+	// 		a
+	// 		 	color: #000
+	// 		 	text-transform: uppercase
+	// 		 	+font-Oswald(700)
+	// 		 	font-size: 24px 
+	// 		 	line-height: 40px 
+	// 		a:hover
+	// 			text-decoration: none
+	// 			color: $color-pink-vintage 
+.logo-desktop
+	width: (163px/2)
+	height: $hegint-menu
+	margin: auto
+	position: relative
+	//margin-top: 20px  
+.container-opening-hours
+	width: 100%
+	height: $hegint-menu
+	position: relative
+	.opening-hours
+		width: 100%
+		position: absolute
+		bottom: 0
+		span
+			+font-poppins(300,14px) 
+			float: left
+			strong
+				+font-poppins(600,14px)
+				text-transform: uppercase
+		span.time-desktop
+			display: block
+			+font-poppins(300,14px) 
+			float: left
+			strong
+				+font-poppins(600,14px)
+				text-transform: uppercase
+		span.time-mobile
+			display: none
+			+font-poppins(300,14px) 
+			float: left
+			strong
+				+font-poppins(600,14px)
+				text-transform: uppercase
+.time-desktop
+	display: block
+.time-mobile
+	display: none
+.container-time
+	width: 100%
+	float: left 
+	display: none
+	position: absolute
+	left: -15px
+	top:17px 
+	&.open
+		display: block
+	.container-day
+		width: 100%
+		float: left
+		background-color: $color-open-hours
+		position: relative
+		z-index: 11 
+	ul.day-hours
+		
+		padding: 0
+		float: left 
+		width: auto 
+		padding:15px 
+		margin: 0 
+		li
+			list-style: none
+			+font-poppins(500,13px)
+			font-style: italic
+			width: auto
+			margin-bottom: 5px
+			float: left
+			text-transform: uppercase
+			span
+				float: left
+				//margin-top: 10px   
+			span.active
+				border-bottom: 2px solid #000;
+				line-height: 13px 
+				margin-top: 5px 
+				// text-decoration: underline 2px
+
+				
+
+			&.active 
+				border-bottom: 2px solid #000;
+.icon-small-drop-down
+	margin-top: 0px
+	cursor: pointer
+	width: auto
+	float: left 
+	width: 15px
+	height: 9px  
+	position: relative
+	z-index: 1 
+.container-humber-menu
+	width: 30px
+	height: $hegint-menu
+	position: relative
+	float: right
+	#humber-menu-destop
+		width: 30px
+		height: 20px 
+		position: absolute
+		bottom: 0
+		right: 0px 
+		cursor: pointer
+		display: block
+		z-index: 1
+		&.hide
+			display: none
+.banner
+	width: 100%
+	float: left
+	margin-top: 8px  	
+
+
+//list main category
+#container-list-category
+	float: left
+	width: 100% 
+
+.container-list-main-category
+	width: 100%
+	height: 100%
+	float: left
+	position: relative
+	overflow: hidden
+	background: transparent 
+	img
+		-webkit-transition: .16s
+		transition:.25s;
+		-webkit-transform: translateZ(0);
+		-moz-transform: translateZ(0);
+		-ms-transform: translate(Z0);
+		-o-transform: translateZ(0);
+		transform: translateZ(0);
+		&.animatin
+			-moz-transform: translateZ(0) scale(1.0,1.0) rotate(2deg)
+			-ms-transform: translateZ(0) scale(1.0,1.0) rotate(2deg)
+			-o-transform: translateZ(0) scale(1.0,1.0) rotate(2deg)
+			-webkit-transform: translateZ(0) scale(0.9,0.9) rotate(2deg)
+			transform: translateZ(0) scale(1.1,1.1) rotate(2deg)	
+    
+    
+	.form-subscribe
+		background-color: #fff
+		width: 90%
+		margin-left: auto
+		margin-right: auto  
+		margin-top: 23px 
+		p
+			float: left
+			text-transform: uppercase
+			width: 100% 
+		.screen-reader-response
+			display: none
+		span.wpcf7-form-control-wrap.subscribe
+			display: none
+		span.wpcf7-not-valid-tip
+			+font-poppins(300,11px)
+			color: red
+			margin-top: 10px 
+			float: left
+		.wpcf7-response-output.wpcf7-display-none.wpcf7-mail-sent-ng
+			display: none !important
+		.wpcf7-response-output.wpcf7-display-none.wpcf7-validation-errors
+			display: none !important
+		.wpcf7-response-output.wpcf7-display-none.wpcf7-mail-sent-ok
+			+font-poppins(300,11px)
+			color: green
+			float: left
+			margin-top: 15px
+			margin-left: 5px   
+		.email-from-subscribe
+			float: left
+			width: 80%
+			input.wpcf7-form-control.wpcf7-text.wpcf7-email.wpcf7-validates-as-required.wpcf7-validates-as-email.subscribe-email
+				width: 100% 
+				height: 40px 
+				float: left
+				padding-left:15px
+				border-bottom: 2px solid #000
+				border-left: 2px solid #000
+				border-top: 2px solid #000 
+				margin-left: 1px 
+				-webkit-border-radius: 0
+				border-radius: 0
+				+font-poppins(300,12px)
+			input.wpcf7-form-control.wpcf7-text.wpcf7-email.wpcf7-validates-as-required.wpcf7-validates-as-email.subscribe-email:focus
+				outline: 0 
+				-webkit-border-radius: 0
+				border-radius: 0
+		.submit-from-subcribe-email
+			float: left
+			width: 20%
+			input.wpcf7-form-control.wpcf7-submit
+				width: 100%
+				float: left
+				height: 40px 
+				border: 2px solid #000
+				-webkit-border-radius: 0
+				border-radius: 0
+				+font-poppins(600,14px) 
+				background-color: #FFF 
+		.mailpoet-subcribe
+			display: none
+		.title-subscribe
+			float: left
+			width: 100%
+			+font-poppins(600,20px)
+			text-transform: uppercase
+			text-align: center 
+		.desc-subscribe
+			float: left
+			width: 100%
+			+font-poppins(300,13px) 
+			margin-bottom: 15px 
+			margin-top: -7px 
+			text-align: center 
+
+	.front-list-main-category
+		position: absolute
+		width: 100%
+		height: 100%  
+		top:0
+		display: block
+		&.disply-none
+			display: none
+		.overlay-front-main-category
+			position: absolute
+			width: 100%
+			height: 100%
+			top:0
+			z-index: 1
+			background-color: rgba(255,255,255,.8)     
+		.box-list-main-category
+			position: absolute
+			width: 100%
+			height: 100%
+			top:0
+			z-index: 2
+			ul.clothes
+				padding: 0
+				margin: 0 
+				position: absolute 
+				width: 220px
+				left: 50% 
+				top:50%
+				margin-left: -(220px/2) 
+				+height-hover(140px)
+				li
+				 	list-style: none
+				 	text-align: center
+				 	text-transform: uppercase
+				 	+font-poppins(600,20px)
+				 	a
+				 		color: #000
+				 	a:hover
+				 	 	//text-decoration: none
+				li+li:before
+					content: "—"
+					width: 100% 
+					float: left
+					text-align: center
+			ul.foods
+				padding: 0
+				margin: 0 
+				position: absolute 
+				width: 220px
+				left: 50% 
+				top:50%
+				margin-left: -(220px/2) 
+				float: left
+				+height-hover(84px)
+				li
+				 	list-style: none
+				 	text-align: center
+				 	text-transform: uppercase
+				 	+font-poppins(600,20px)
+				 	a
+				 		color: #000
+				 	a:hover
+				 	 	//text-decoration: none
+				li+li:before
+					content: "—"
+					width: 100% 
+					float: left
+					text-align: center      
+			ul.decorations
+				padding: 0
+				margin: 0 
+				position: absolute 
+				width: 220px
+				left: 50% 
+				top:50%
+				margin-left: -(220px/2) 
+				+height-hover(84px)
+				li
+				 	list-style: none
+				 	text-align: center
+				 	text-transform: uppercase
+				 	+font-poppins(600,20px)
+				 	a
+				 		color: #000
+				 	a:hover
+				 	 	//text-decoration: none
+				li+li:before
+					content: "—"
+					width: 100% 
+					float: left
+					text-align: center
+			ul.toys
+				padding: 0
+				margin: 0 
+				position: absolute 
+				width: 220px
+				left: 50% 
+				top:50%
+				margin-left: -(220px/2) 
+				+height-hover(84px)
+				li
+				 	list-style: none
+				 	text-align: center
+				 	text-transform: uppercase
+				 	+font-poppins(600,20px)
+				 	a
+				 		color: #000
+				 	a:hover
+				 	 	//text-decoration: none
+				li+li:before
+					content: "—"
+					width: 100% 
+					float: left
+					text-align: center
+			ul.health
+				padding: 0
+				margin: 0 
+				position: absolute 
+				width: 220px
+				left: 50% 
+				top:50%
+				margin-left: -(220px/2) 
+				+height-hover()
+				li
+				 	list-style: none
+				 	text-align: center
+				 	text-transform: uppercase
+				 	+font-poppins(600,20px)
+				 	a
+				 		color: #000
+				 	a:hover
+				 	 	//text-decoration: none
+				li+li:before
+					content: "—"
+					width: 100% 
+					float: left
+					text-align: center
+			ul.services
+				padding: 0
+				margin: 0 
+				position: absolute 
+				width: 220px
+				left: 50% 
+				top:50%
+				margin-left: -(220px/2) 
+				+height-hover()
+				li
+				 	list-style: none
+				 	text-align: center
+				 	text-transform: uppercase
+				 	+font-poppins(600,20px)
+				 	a
+				 		color: #000
+				 	a:hover
+				 	 	//text-decoration: none
+				li+li:before
+					content: "—"
+					width: 100% 
+					float: left
+					text-align: center		
+			ul.groceries
+				padding: 0
+				margin: 0 
+				position: absolute 
+				width: 220px
+				left: 50% 
+				top:50%
+				margin-left: -(220px/2) 
+				+height-hover()
+				li
+				 	list-style: none
+				 	text-align: center
+				 	text-transform: uppercase
+				 	+font-poppins(600,20px)
+				 	a
+				 		color: #000
+				 	a:hover
+				 	 	//text-decoration: none
+				li+li:before
+					content: "—"
+					width: 100% 
+					float: left
+					text-align: center
+	.hover-list-shop-category
+		display: none
+		position: absolute
+		width: 100%
+		height: 100%
+		top:0
+		z-index: 1
+		&.display-block
+			display: block
+		.box-list-main-category
+			position: absolute
+			width: 100%
+			height: 100%
+			top:0
+			z-index: 2
+			ul.clothes
+				padding: 0
+				margin: 0 
+				position: absolute 
+				width: 225px
+				left: 50% 
+				top:50%
+				margin-left: -(225px/2) 
+				+height-hover(252px)
+				li
+				 	list-style: none
+				 	text-align: center
+				 	text-transform: uppercase
+				 	+font-poppins(600,20px)
+				 	a
+				 		color: #000
+				 	a:hover
+				 	 	//text-decoration: none
+				li+li:before
+					content: "—"
+					width: 100% 
+					float: left
+					text-align: center
+			ul.foods
+				padding: 0
+				margin: 0 
+				position: absolute 
+				width: 225px
+				left: 50% 
+				float: left
+				top:50%
+				margin-left: -(225px/2) 
+				+height-hover(252px)
+				li
+				 	list-style: none
+				 	text-align: center
+				 	text-transform: uppercase
+				 	+font-poppins(600,20px)
+				 	a
+				 		color: #000
+				 	a:hover
+				 	 	//text-decoration: none
+				li+li:before
+					content: "—"
+					width: 100% 
+					float: left
+					text-align: center      
+			ul.decorations
+				padding: 0
+				margin: 0 
+				position: absolute 
+				width: 225px
+				left: 50% 
+				top:50%
+				margin-left: -(225px/2)
+				float: left 
+				+height-hover(196px)
+				li
+				 	list-style: none
+				 	text-align: center
+				 	text-transform: uppercase
+				 	+font-poppins(600,20px)
+				 	a
+				 		color: #000
+				 	a:hover
+				 	 	//text-decoration: none
+				li+li:before
+					content: "—"
+					width: 100% 
+					float: left
+					text-align: center
+			ul.toys
+				padding: 0
+				margin: 0 
+				position: absolute 
+				width: 225px
+				left: 50% 
+				top:50%
+				margin-left: -(225px/2) 
+				float: left
+				+height-hover(196px)
+				li
+				 	list-style: none
+				 	text-align: center
+				 	text-transform: uppercase
+				 	+font-poppins(600,20px)
+				 	a
+				 		color: #000
+				 	a:hover
+				 	 	//text-decoration: none
+				li+li:before
+					content: "—"
+					width: 100% 
+					float: left
+					text-align: center
+			ul.health
+				padding: 0
+				margin: 0 
+				position: absolute 
+				width: 225px
+				left: 50% 
+				top:50%
+				float: left
+				margin-left: -(225px/2) 
+				+height-hover(252px)
+				li
+				 	list-style: none
+				 	text-align: center
+				 	text-transform: uppercase
+				 	+font-poppins(600,20px)
+				 	a
+				 		color: #000
+				 	a:hover
+				 	 	//text-decoration: none
+				li+li:before
+					content: "—"
+					width: 100% 
+					float: left
+					text-align: center
+			ul.services
+				padding: 0
+				margin: 0 
+				position: absolute 
+				width: 225px
+				left: 50% 
+				top:50%
+				float: left
+				margin-left: -(225px/2) 
+				+height-hover(140px)
+				li
+				 	list-style: none
+				 	text-align: center
+				 	text-transform: uppercase
+				 	+font-poppins(600,20px)
+				 	a
+				 		color: #000
+				 	a:hover
+				 	 	//text-decoration: none
+				li+li:before
+					content: "—"
+					width: 100% 
+					float: left
+					text-align: center		
+			ul.groceries
+				padding: 0
+				margin: 0 
+				position: absolute 
+				width: 225px
+				left: 50% 
+				top:50%
+				margin-left: -(225px/2) 
+				float: left
+				+height-hover(84px)
+				li
+				 	list-style: none
+				 	text-align: center
+				 	text-transform: uppercase
+				 	+font-poppins(600,20px)
+				 	a
+				 		color: #000
+				 	a:hover
+				 	 	//text-decoration: none
+				li+li:before
+					content: "—"
+					width: 100% 
+					float: left
+					text-align: center
+
+.container-list-main-category:hover,.container-list-main-category:active,.container-list-main-category:hover
+	img
+		-moz-transform: translateZ(0) scale(1.0,1.0) rotate(2deg)
+		-ms-transform: translateZ(0) scale(1.0,1.0) rotate(2deg)
+		-o-transform: translateZ(0) scale(1.0,1.0) rotate(2deg)
+		-webkit-transform: translateZ(0) scale(0.9,0.9) rotate(2deg)
+		transform: translateZ(0) scale(1.1,1.1) rotate(2deg)
+	.front-list-main-category
+		display: none
+	.hover-list-shop-category
+		display: block
+// Background Hover 
+.overlay-hover-clothes-category
+	+blackGroundHover(rgba(254,249,234,.8))
+
+.overlay-hover-foods-category
+	+blackGroundHover(rgba(238,207,207,.8))
+
+.overlay-hover-decoration-category
+	+blackGroundHover(rgba(205,209,223,.8))
+
+.overlay-hover-toy-category
+	+blackGroundHover(rgba(186,205,188,.8))
+
+.overlay-hover-health-category
+	+blackGroundHover(rgba(223,204,220,.8))
+
+.overlay-hover-service-category
+	+blackGroundHover(rgba(230,220,197,.8))
+
+.overlay-hover-groceries-category
+	+blackGroundHover(rgba(255,255,255,.9))
+
+.contact-form
+	float: left
+	width: 100%
+	margin-bottom: 0  
+
+// list brand
+.img-bands
+	width: 100%
+	height: 100%
+	float: left
+	overflow: hidden  
+	img
+		-webkit-transition: .16s
+		transition:.25s;
+		-webkit-transform: translateZ(0);
+		-moz-transform: translateZ(0);
+		-ms-transform: translate(Z0);
+		-o-transform: translateZ(0);
+		transform: translateZ(0);
+.img-bands:hover
+	img
+		-moz-transform: translateZ(0) scale(1.0,1.0) 
+		-ms-transform: translateZ(0) scale(1.0,1.0) 
+		-o-transform: translateZ(0) scale(1.0,1.0) 
+		-webkit-transform: translateZ(0) scale(0.9,0.9) 
+		transform: translateZ(0) scale(1.1,1.1) 
+
+// Subpage shop
+.swiper-image-shop
+	width: 100%
+	float: left
+	position: relative
+	overflow: hidden
+.swiper-image-shoppagination
+	position: absolute
+	text-align: center
+	width: 100%
+	z-index: 1
+	bottom: 0
+	left: 0 
+.swiper-pagination-bullet
+	width: 20px
+	height: 20px
+	opacity: 1
+	background: #FFF 
+	margin-left: 5px
+	margin-right: 5px   
+.swiper-pagination-bullet-active
+	background: #b3b2b2;
+
+.margin-detail
+	width: 100% 
+	float: left
+	margin-top: 8px 
+img.ajax-loader
+	display: none !important
+// .swiper-image-shoppagination
+// 	position: absolute
+// 	text-align: center
+
+#description-shop
+	width: 100%
+	float: left 
+	min-height: 468px 
+	//margin-top: 8px 
+
+
+.desktop
+	display: block
+	
+.mobile
+	display: none
+
+.background-color-detail
+	width: 100%
+	height: 100%
+	position: absolute
+	top:0  
+.container-detail-shop
+	width: 100%
+	height: 300px
+	position: relative
+	z-index: 1
+	h1
+		+font-poppins(600,24px)
+.description-content-shop
+	p
+		+font-poppins(300,14px)
+.openTime-Tel-website
+	margin-top: 15px 
+.container-opentime,.container-phone,.container-url-web
+	h3
+		+font-poppins(600,16px)
+		text-transform: uppercase
+	p,a
+		+font-poppins(300,11px)
+		font-style: italic;
+		color: black
+
+#list-brand-category
+	width: 100%
+	float: left  
+// ABOUT US PAGE
+#about-us
+	float: left
+	width: 100%
+	margin-top: 9px
+	position: relative
+	margin-bottom: -1px 
+
+.container-detail-about-us
+	margin-top: 15% 
+	h1
+		+font-poppins(600,24px)
+
+// CONTACT PAGE
+
+.container-contact-us
+	width: 100%
+	float: left
+	margin-top: 50px  
+#container-contact-us
+	width: 100%
+	margin-top: 100px
+	float: left
+	margin-bottom: 50px 
+	
+.box-container-contact-us
+	+font-poppins(300,17px)
+	h3
+		margin-top: 0 
+	color: #000
+	p
+		+font-poppins(300,13px)	
+		color: #000
+
+.container-address
+	float: left
+	width: 100%
+	margin-bottom: 50px  
+	margin-top: 15px 
+	p
+		+font-poppins(600,11px)
+		color: #000 
+	a
+		color: #000 
+.title-contact-us
+	h3
+		+font-poppins(700,23px)
+		color: #000
+.detail-contact-us
+	p,a
+		+font-poppins(500,14px)	
+		color: #000 
+.title-contact-address
+	h4
+		+font-poppins(700,14px)	
+
+// event page
+// .swiper-button-disabled
+// 	opacity: 0.4 
+.swiper-slide
+	float: left
+.image_slide-button-prev
+	width: 28px 
+	position: absolute
+	left: 50%
+	top: 35px
+	margin-left: -(28px/2)  
+	z-index: 5 
+.image_slide-button-next
+	width: 28px 
+	position: absolute
+	left: 50%
+	bottom: 35px
+	margin-left: -(28px/2)  
+	z-index: 5
+	
+.container-box-list-event
+	width: 100%
+	float: left 
+	//height: 550px 
+	margin-right: auto
+	margin-left: auto 
+	position: relative
+	margin-top: 8px
+	 
+	
+	.box-list-event
+		width: 100% 
+		background-color: #fef8e5
+		margin-left: auto
+		margin-right: auto
+		padding-top: 80px
+		padding-bottom: 80px
+		float: left
+
+#parent
+	width: 100%
+	height: 288px
+	overflow: hidden
+.child
+ 	width: 100%
+ 	height: auto
+ 	float: left 
+
+//  #parent{
+//  width:100%;
+//  height:288px;
+//  border:1px solid #000;
+//  overflow:hidden;
+// }
+.custom-mobile
+	width: 100% !important 
+
+section#footer
+	float: left
+	width: 100% 
+.swiper-container
+	//height: auto 
+	//height: 600px
+	height: 850px 
+	// width: 650px 
+	text-align: center 
+	position: relative
+	//top: 80px
+	// padding-top: 80px 
+
+.container-list-event
+	width: 100% 
+	float: left
+	position: relative
+	top:0
+	.title-event
+		display: inline-block
+		font-size: 0 
+		//width: 100%
+		//float: left
+		text-align: center 
+		//margin-bottom: 20px 
+		span
+	 		+font-poppins(600,14px)
+	 		color: #000
+	 		text-transform: uppercase
+	.border-title
+		border-bottom: 2px solid #000
+		float: left
+		display: inline-block
+		margin-top: -4px
+		width: 100%  
+	   
+	.content-list-event
+		p
+			+font-poppins(500,14px)
+			color: #000
+
+.content-list-event
+	width: 100%
+	float: left 
+	padding-left: 15px
+	padding-right: 15px  
+	position: relative
+	top:0
+	// -ms-word-wrap: break-word 
+	// word-wrap: break-word 
+// in
+#container-Inspiration
+	width: 100%
+	margin-top: 50px
+	float: left  
+.box-img-inspiration
+	height: auto
+	overflow: hidden
+	position: relative
+	//background-color: red
+	.overlat-hover-in
+		display: none
+		height: 100%
+		width: 100%
+		position: absolute
+		top: 0
+		background-color: rgba(254,249,232,0.7)   
+	.img-inspiration
+		height: 100%
+		-webkit-background-size: cover
+		 -o-background-size: cover
+		 background-size: cover
+.box-img-inspiration:hover
+	.overlat-hover-in
+		display: block
+.container-wrap-like-comment
+	width: 60px
+	height: 67px
+	position: absolute
+	left: 50%
+	top: 50%
+	margin-top: -(67px/2)
+	margin-left: -(60px/2)     
+	.wrap-like
+		width: 100% 
+		float: left
+		margin-bottom: 7px 
+		.In-like
+			background-image: url(../img/like-icon.png)
+			-webkit-background-size: cover
+			-o-background-size: cover
+			background-size: cover
+			width: 29px
+			height: 29px
+			float: left
+			margin-right: 6px
+		.count-like
+			float: left
+			+font-poppins(600,19px)
+			color: black
+			margin-top: 3px 
+	.wrap-comment
+		width: 100%
+		float: left 
+		.In-comment
+			background-image: url(../img/comment-icon.png)
+			-webkit-background-size: cover
+			-o-background-size: cover
+			background-size: cover
+			width: 29px
+			height: 29px
+			float: left
+			margin-right: 6px
+		.count-comment
+		 	float: left
+		 	+font-poppins(600,19px)
+		 	color: black 
+		 	margin-top: 5px 
+ 
+// Footer front-page
+#map-canvas
+	width: 100%
+	height: 425px 
+.backgroundContact
+	background-color: #fef8e5
+	float: left
+	width: 100%  
+.container-footer
+	background-color: $color-bg-footer
+	width: 100%
+	height: 370px
+	position: relative  
+	.contanier-detail-contact
+		position: relative
+		margin-top: (67px/2)
+		width: 526px
+		float: left;
+		.footer-address-contact
+			margin-top: (50px/2)
+			p
+				+font-poppins(600,14px)
+			a.email-footer
+				margin-top: 25px
+				float: left
+				width: 100%  
+				color: #000
+			a.email-footer:hover
+			 	text-decoration: none
+		.box-title-footer
+			display: inline-block
+		.border-title
+			border-bottom: 2px solid #000
+			float: left
+			width: 100%
+			margin-top: -15px 
+			
+		span.title-footer-menu
+			text-transform: uppercase
+			+font-poppins(600,17px)
+			//border-bottom: $border-title-black
+.social-media
+	ul
+		padding: 0
+		padding-top: (85px/2) 
+		li
+		 	list-style-type: none
+		 	float: left
+		 	margin-right: 10px 
+		 	width: 55px 
+@import media
