@@ -36,6 +36,8 @@
 									$index = 0;
 									$indexActive = 0;
 									$left =1;
+									$futureEventCount = 0;
+
 									foreach ($events as $event ) 
 									{	
 								?>
@@ -52,6 +54,8 @@
 													$active = 1 ;
 													$indexActive = $index ;
 												}
+
+												$futureEventCount++;
 											}	
 										?>
 										<div class="swiper-slide">
@@ -68,9 +72,10 @@
 												</div>
 											</div>
 										</div>
-								<?php 
+									<?php 
 									}
-								?>
+									addTempSlideItems(4, $futureEventCount);
+									?>
 							</div>
 						</div>
 					</div>
@@ -133,6 +138,10 @@
 														$left +=1;
 														$indexActive = $index ;
 													}
+												}
+												else
+												{
+													$indexActive = $index;
 												}	
 											?>
 											<div class="swiper-slide">
@@ -152,16 +161,10 @@
 													</div>
 												</div>
 											</div>
-											
-											<div class="swiper-slide">
-											</div>
-											<div class="swiper-slide">
-											</div>
-											<div class="swiper-slide">
-											</div>
-									<?php 
+										<?php 
 										}
-									?>
+										addTempSlideItems(2, $futureEventCount);
+										?>
 								</div>
 							</div>
 						</div>
@@ -176,19 +179,11 @@
 </div>
 <?php get_footer(); ?>
  <script>
-  	var indexid= <?php echo $indexActive ;?> -1  ;
+  	var indexid= <?php echo $indexActive ;?> -1;
+
+  	//var indexid = 2;
   	console.log("index:"+indexid);
   	var leftID = <?php echo $left ;?> ;
-  	var view = 0;
-  	if (leftID < 4) 
-  	{
-  		view = leftID;
-  	}
-  	if (leftID >= 4) 
-  	{
-  		view = 4;
-  		//console.log(leftID);
-  	}
 
     var swiper = new Swiper('.swiper-container', {
         paginationClickable: true,
@@ -196,7 +191,7 @@
         nextButton: '.image_slide-button-next',
         prevButton: '.image_slide-button-prev',
         slidesPerView: 4,
-        centeredSlides: true,
+        centeredSlides: false,
         //slidesPerView: 'auto',
         
         initialSlide : indexid,

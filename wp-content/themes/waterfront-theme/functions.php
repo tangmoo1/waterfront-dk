@@ -1,4 +1,28 @@
 <?php
+/**
+*$slidesPerView: integer
+*$futureEventCount: integer
+*/
+function addTempSlideItems($slidesPerView = 4, $futureEventCount)
+{
+    if($futureEventCount > $slidesPerView)
+        $futureEventCount = $futureEventCount % $slidesPerView;
+
+    if($slidesPerView == $futureEventCount)
+        return;
+
+    if(!empty($futureEventCount) && $futureEventCount > 0)
+    {
+        $loop = $slidesPerView - $futureEventCount;
+        for($fnIndex=0;$fnIndex<$loop;$fnIndex++)
+        {
+            echo '<div class="swiper-slide"></div>';
+        }
+    }
+
+    return;
+} 
+
 /* ----------------------------------------------------------------------------------- */
 /* //Custom script
 /*------------------------------------------------------------------------------------ */
