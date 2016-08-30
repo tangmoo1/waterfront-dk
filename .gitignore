@@ -1,0 +1,4 @@
+wp-config.php
+db-replace.php
+.htaccess
+wp-content/cache/
