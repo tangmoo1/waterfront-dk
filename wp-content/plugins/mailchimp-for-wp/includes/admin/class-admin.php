@@ -50,10 +50,14 @@ class MC4WP_Admin {
 		// Actions used globally throughout WP Admin
 		add_action( 'admin_menu', array( $this, 'build_menu' ) );
 		add_action( 'admin_init', array( $this, 'initialize' ) );
+
 		add_action( 'current_screen', array( $this, 'customize_admin_texts' ) );
 		add_action( 'wp_dashboard_setup', array( $this, 'register_dashboard_widgets' ) );
 		add_action( 'mc4wp_admin_empty_lists_cache', array( $this, 'renew_lists_cache' ) );
 		add_action( 'mc4wp_admin_empty_debug_log', array( $this, 'empty_debug_log' ) );
+
+		add_action( 'admin_notices', array( $this, 'show_api_key_notice' ) );
+		add_action( 'mc4wp_admin_dismiss_api_key_notice', array( $this, 'dismiss_api_key_notice' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 
 		$this->ads->add_hooks();
@@ -103,7 +107,7 @@ class MC4WP_Admin {
 		do_action( 'mc4wp_admin_' . $action );
 
 		// redirect back to where we came from
-		$redirect_url = remove_query_arg( '_mc4wp_action' );
+		$redirect_url = ! empty( $_POST['_redirect_to'] ) ? $_POST['_redirect_to'] : remove_query_arg( '_mc4wp_action' );
 		wp_redirect( $redirect_url );
 		exit;
 	}
@@ -123,6 +127,7 @@ class MC4WP_Admin {
 		 * Use this hook to register your own dashboard widgets for users with the required capability.
 		 *
 		 * @since 3.0
+         * @ignore
 		 */
 		do_action( 'mc4wp_dashboard_setup' );
 
@@ -141,14 +146,33 @@ class MC4WP_Admin {
 			update_option( 'mc4wp_version', $previous_version );
 		}
 
-		// Only run if db option is at older version than code constant
 		$previous_version = get_option( 'mc4wp_version', 0 );
 
-		// This ! check means we're not running when installing the plugin
-		if( ! $previous_version || version_compare( MC4WP_VERSION, $previous_version, '<=' ) ) {
+        // Ran upgrade routines before?
+        if( empty( $previous_version ) ) {
+            update_option( 'mc4wp_version', MC4WP_VERSION );
+
+            // if we have at least one form, we're going to run upgrade routine for v3 => v4 anyway.
+            // TODO: Remove this once we hit 4.2.x
+            $posts = get_posts( array( 'post_type' => 'mc4wp-form', 'numberposts' => 1 ) );
+            if( empty( $posts ) ) {
+                return false;
+            }
+
+            $previous_version = '3.9';
+        }
+
+        // Rollback'ed?
+        if( version_compare( $previous_version, MC4WP_VERSION, '>' ) ) {
+            update_option( 'mc4wp_version', MC4WP_VERSION );
+            return false;
+        }
+
+		// This means we're good!
+		if( version_compare( $previous_version, MC4WP_VERSION ) > -1 ) {
 			return false;
 		}
-
+		
 		define( 'MC4WP_DOING_UPGRADE', true );
 		$upgrade_routines = new MC4WP_Upgrade_Routines( $previous_version, MC4WP_VERSION, dirname( __FILE__ ) . '/migrations' );
 		$upgrade_routines->run();
@@ -407,7 +431,14 @@ class MC4WP_Admin {
 	 */
 	public function show_generals_setting_page() {
 		$opts = mc4wp_get_options();
-		$connected = ( mc4wp('api')->is_connected() );
+
+        try {
+            $connected = $this->get_api()->is_connected();
+        } catch( Exception $e ) {
+            $this->messages->flash( $e->getMessage(), 'error' );
+            $connected = false;
+        }
+
 		$lists = $this->mailchimp->get_lists();
 		$obfuscated_api_key = mc4wp_obfuscate_string( $opts['api_key'] );
 		require MC4WP_PLUGIN_DIR . 'includes/views/general-settings.php';
@@ -446,10 +477,56 @@ class MC4WP_Admin {
 	}
 
 	/**
+	 * Shows a notice when API key is not set.
+	 */
+	public function show_api_key_notice() {
+
+		// don't show if on settings page already
+		if( isset( $_GET['page'] ) && $_GET['page'] === 'mailchimp-for-wp' ) {
+			return;
+		}
+
+		// only show to user with proper permissions
+		if( ! $this->is_user_authorized() ) {
+			return;
+		}
+
+		// don't show if dismissed
+		if( get_transient( 'mc4wp_api_key_notice_dismissed' ) ) {
+			return;
+		}
+
+		// don't show if api key is set already
+		$options = mc4wp_get_options();
+		if( ! empty( $options['api_key'] ) ) {
+			return;
+		}
+
+		echo '<div class="notice notice-warning" style="position: relative; padding-right: 36px;">';
+		echo '<p>' . sprintf( __( 'To get started with MailChimp for WordPress, please <a href="%s">enter your MailChimp API key on the settings page of the plugin</a>.', 'mailchimp-for-wp' ), admin_url( 'admin.php?page=mailchimp-for-wp' ) ) . '</p>';
+		echo '<form method="post"><input type="hidden" name="_mc4wp_action" value="dismiss_api_key_notice" /><button type="submit" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></form>';
+		echo '</div>';
+	}
+
+	/**
+	 * Dismisses the API key notice for 1 week
+	 */
+	public function dismiss_api_key_notice() {
+		set_transient( 'mc4wp_api_key_notice_dismissed', 1, 3600 * 24 * 7 );
+	}
+
+	/**
 	 * @return MC4WP_Debug_Log
 	 */
 	protected function get_log() {
 		return mc4wp('log');
 	}
+
+    /**
+     * @return MC4WP_API_v3
+     */
+	protected function get_api() {
+	    return mc4wp('api');
+    }
 
 }

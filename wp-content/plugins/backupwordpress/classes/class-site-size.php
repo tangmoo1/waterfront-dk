@@ -50,11 +50,19 @@ class Site_Size {
 		// Include database size except for file only schedule.
 		if ( 'file' !== $this->type ) {
 
-			global $wpdb;
-			$tables = $wpdb->get_results( 'SHOW TABLE STATUS FROM `' . DB_NAME . '`', ARRAY_A );
+			$size = (int) get_transient( 'hmbkp_database_size' );
 
-			foreach ( $tables as $table ) {
-				$size += (float) $table['Data_length'];
+			if ( ! $size ) {
+
+				global $wpdb;
+
+				$tables = $wpdb->get_results( 'SHOW TABLE STATUS FROM `' . DB_NAME . '`', ARRAY_A );
+
+				foreach ( $tables as $table ) {
+					$size += (float) $table['Data_length'];
+				}
+
+				set_transient( 'hmbkp_database_size', $size, WEEK_IN_SECONDS );
 			}
 		}
 
@@ -97,8 +105,8 @@ class Site_Size {
 	 *
 	 * @return bool
 	 */
-	public static function is_site_size_cached() {
-		return false !== get_transient( 'hmbkp_directory_filesizes' );
+	public function is_site_size_cached() {
+		return (bool) $this->get_cached_filesizes();
 	}
 
 	/**
@@ -120,7 +128,7 @@ class Site_Size {
 		@set_time_limit( 0 );
 
 		// Use the cached array directory sizes if available
-		$directory_sizes = get_transient( 'hmbkp_directory_filesizes' );
+		$directory_sizes = $this->get_cached_filesizes();
 
 		// If we do have it in cache then let's use it and also clear the lock
 		if ( is_array( $directory_sizes ) ) {
@@ -143,10 +151,9 @@ class Site_Size {
 			} else {
 				$directory_sizes[ wp_normalize_path( $file->getRealpath() ) ] = 0;
 			}
-
 		}
 
-		set_transient( 'hmbkp_directory_filesizes', $directory_sizes, DAY_IN_SECONDS );
+		file_put_contents( PATH::get_path() . '/.files', gzcompress( json_encode( $directory_sizes ) ) );
 
 		// Remove the lock
 		delete_transient( 'hmbkp_directory_filesizes_running' );
@@ -186,9 +193,17 @@ class Site_Size {
 
 	public function directory_filesize( \SplFileInfo $file ) {
 
-		// If we haven't calculated the site size yet then kick it off in a thread
-		$directory_sizes = get_transient( 'hmbkp_directory_filesizes' );
+		// For performance reasons we cache the root.
+		if ( $file->getRealPath() === PATH::get_root() && $this->excludes ) {
 
+			$directory_sizes = get_transient( 'hmbkp_root_size' );
+			if ( $directory_sizes ) {
+				return $directory_sizes;
+			}
+		}
+
+		// If we haven't calculated the site size yet then kick it off in a thread
+		$directory_sizes = $this->get_cached_filesizes();
 
 		if ( ! is_array( $directory_sizes ) ) {
 			$this->rebuild_directory_filesizes();
@@ -197,7 +212,10 @@ class Site_Size {
 			return null;
 		}
 
-		// The filepaths are stored in keys so we need to flip for use with preg_grep
+		/*
+		 * Ensure we only include files in the current path, the filepaths are stored in keys
+		 * so we need to flip for use with preg_grep.
+		 */
 		$directory_sizes = array_flip( preg_grep( '(' . wp_normalize_path( $file->getRealPath() ) . ')', array_flip( $directory_sizes ) ) );
 
 		if ( $this->excludes ) {
@@ -208,8 +226,15 @@ class Site_Size {
 			}
 		}
 
-		// Directory size is now just a sum of all files across all sub directories
-		return absint( array_sum( $directory_sizes ) );
+		$directory_sizes = absint( array_sum( $directory_sizes ) );
+
+		// For performance reasons we cache the root.
+		if ( $file->getRealPath() === PATH::get_root() && $this->excludes ) {
+			set_transient( 'hmbkp_root_size', $directory_sizes, DAY_IN_SECONDS );
+		}
+
+		// Directory size is now just a sum of all files across all sub directories.
+		return $directory_sizes;
 
 	}
 
@@ -228,4 +253,20 @@ class Site_Size {
 
 	}
 
+	public function get_cached_filesizes( $max_age = WEEK_IN_SECONDS ) {
+
+		$cache = PATH::get_path() . '/.files';
+		$files = false;
+
+		if ( file_exists( $cache ) ) {
+
+			// If the file is old then regenerate it
+			if ( ( time() - filemtime( $cache ) ) <= $max_age ) {
+				$files = json_decode( gzuncompress( file_get_contents( $cache ) ), 'ARRAY_A' );
+			}
+		}
+
+		return $files;
+
+	}
 }

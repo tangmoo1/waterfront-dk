@@ -3,7 +3,7 @@
 Plugin Name: MailChimp for WordPress
 Plugin URI: https://mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-for-wp&utm_campaign=plugins-page
 Description: MailChimp for WordPress by ibericode. Adds various highly effective sign-up methods to your site.
-Version: 3.1.5
+Version: 4.0.3
 Author: ibericode
 Author URI: https://ibericode.com/
 Text Domain: mailchimp-for-wp
@@ -11,7 +11,7 @@ Domain Path: /languages
 License: GPL v3
 
 MailChimp for WordPress
-Copyright (C) 2012-2015, Danny van Kooten, hi@dannyvankooten.com
+Copyright (C) 2012-2016, Danny van Kooten, hi@dannyvankooten.com
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -47,20 +47,22 @@ function __mc4wp_load_plugin() {
 	}
 
 	// bootstrap the core plugin
-	define( 'MC4WP_VERSION', '3.1.5' );
+	define( 'MC4WP_VERSION', '4.0.3' );
 	define( 'MC4WP_PLUGIN_DIR', dirname( __FILE__ ) . '/' );
 	define( 'MC4WP_PLUGIN_URL', plugins_url( '/' , __FILE__ ) );
 	define( 'MC4WP_PLUGIN_FILE', __FILE__ );
 
-	// load autoloader
-	require_once MC4WP_PLUGIN_DIR . 'vendor/autoload_52.php';
+	// load autoloader if function not yet exists (for compat with sitewide autoloader)
+	if( ! function_exists( 'mc4wp' ) ) {
+		require_once MC4WP_PLUGIN_DIR . 'vendor/autoload_52.php';
+	}
 
 	/**
 	 * @global MC4WP_Container $GLOBALS['mc4wp']
 	 * @name $mc4wp
 	 */
 	$mc4wp = mc4wp();
-	$mc4wp['api'] = 'mc4wp_get_api';
+	$mc4wp['api'] = 'mc4wp_get_api_v3';
 	$mc4wp['request'] = array( 'MC4WP_Request', 'create_from_globals' );
 	$mc4wp['log'] = 'mc4wp_get_debug_log';
 
@@ -112,8 +114,9 @@ add_action( 'plugins_loaded', '__mc4wp_load_plugin', 20 );
  * @since 3.0
  */
 function __mc4wp_flush() {
-	delete_transient( 'mc4wp_mailchimp_lists' );
-	delete_transient( 'mc4wp_mailchimp_lists_fallback' );
+	delete_transient( 'mc4wp_mailchimp_lists_v3' );
+	delete_transient( 'mc4wp_mailchimp_lists_v3_fallback' );
+	delete_transient( 'mc4wp_list_counts' );
 }
 
 register_activation_hook( __FILE__, '__mc4wp_flush' );
